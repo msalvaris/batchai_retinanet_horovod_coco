@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python$PYTHON_VERSION \
         python$PYTHON_VERSION-dev \
         libgtk2.0-dev \
+        python3-tk \
         # Infiniband/RDMA
         cpio \
         libmlx4-1 \
@@ -67,15 +68,13 @@ RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
     python get-pip.py && \
     rm get-pip.py
 
-RUN conda install tk opencv
-
 # Install TensorFlow and Keras
 RUN pip install tensorflow-gpu==${TENSORFLOW_VERSION} h5py cython keras
 
 
 # Install Dependencies
 RUN pip install --no-cache-dir scipy jupyter ipykernel numpy toolz pandas \
- 	scikit-learn pillow pycocotools matplotlib
+ 	scikit-learn pillow pycocotools opencv-python matplotlib
 
 # Install Horovod, temporarily using CUDA stubs
 RUN ldconfig /usr/local/cuda-9.0/targets/x86_64-linux/lib/stubs && \
