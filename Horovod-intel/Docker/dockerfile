@@ -86,8 +86,9 @@ RUN echo NCCL_DEBUG=INFO >> /etc/nccl.conf && \
 
 
 # Download and install retinanet
-RUN git clone https://github.com/fizyr/keras-retinanet.git /keras-retinanet
+RUN git clone https://github.com/fizyr/keras-retinanet.git /keras-retinanet && \
+	pip install /keras-retinanet --user
 
-ENV PYTHONPATH /keras-retinanet:$PYTHONPATH
+#ENV PYTHONPATH /keras-retinanet:$PYTHONPATH
 
 WORKDIR "/keras-retinanet"
