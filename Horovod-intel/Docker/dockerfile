@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libxext6 \
         python$PYTHON_VERSION \
         python$PYTHON_VERSION-dev \
-        #libgtk2.0-dev \
+        libgtk2.0-dev \
         # Infiniband/RDMA
         cpio \
         libmlx4-1 \
@@ -60,7 +60,8 @@ RUN cd /tmp && \
 
 ENV PATH $PATH:/opt/intel/compilers_and_libraries/linux/mpi/bin64
 
-RUN ln -s /usr/bin/python${PYTHON_VERSION} /usr/bin/python
+RUN mv /usr/bin/python /usr/bin/python-old && \
+	ln -s /usr/bin/python${PYTHON_VERSION} /usr/bin/python
 
 RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
     python get-pip.py && \
