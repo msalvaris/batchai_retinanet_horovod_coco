@@ -4,13 +4,21 @@
     "nodeCount": 2,
     "customToolkitSettings": {
       "processCount": 8,
-      "commandLine": "mpirun -mca btl_tcp_if_exclude docker0,lo --allow-run-as-root --hostfile $AZ_BATCHAI_MPI_HOST_FILE python $AZ_BATCHAI_MOUNT_ROOT/afs_batchai/scripts/train.py --steps 500 --tensorboard-dir $AZ_BATCHAI_OUTPUT_OUTPUTFILES/tensorboard --snapshot-path $AZ_BATCHAI_OUTPUT_OUTPUTFILES --no-evaluation coco $AZ_BATCHAI_MOUNT_ROOT/coco"
+      "commandLine": "source /opt/intel/compilers_and_libraries_2017.4.196/linux/mpi/intel64/bin/mpivars.sh;
+                      echo $AZ_BATCH_HOST_LIST;
+                      mpirun -n 8 -ppn 4 -hosts $AZ_BATCH_HOST_LIST
+                      -env I_MPI_FABRICS=dapl
+                      -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0
+                      -env I_MPI_DYNAMIC_CONNECTION=0
+                      -env I_MPI_DEBUG=6
+                      -env I_MPI_HYDRA_DEBUG=on
+                      python $AZ_BATCHAI_MOUNT_ROOT/extfs/scripts/train.py --steps 500 --tensorboard-dir $AZ_BATCHAI_OUTPUT_OUTPUTFILES/tensorboard --snapshot-path $AZ_BATCHAI_OUTPUT_OUTPUTFILES --no-evaluation coco $AZ_BATCHAI_MOUNT_ROOT/extcn"
     },
-    "stdOutErrPathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/afs_batchai",
+    "stdOutErrPathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/extfs",
     "outputDirectories": [
       {
         "id": "OUTPUTFILES",
-        "pathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/afs_batchai",
+        "pathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/extfs",
         "pathSuffix": "output"
       }
     ]
