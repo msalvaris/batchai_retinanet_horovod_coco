@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libxext6 \
         python$PYTHON_VERSION \
         python$PYTHON_VERSION-dev \
-        libgtk2.0-dev \
+        #libgtk2.0-dev \
         # Infiniband/RDMA
         cpio \
         libmlx4-1 \
