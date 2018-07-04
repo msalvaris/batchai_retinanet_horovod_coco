@@ -67,7 +67,7 @@ RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
     python get-pip.py && \
     rm get-pip.py
 
-RUN /usr/bin/conda install tk opencv
+RUN conda install tk opencv
 
 # Install TensorFlow and Keras
 RUN pip install tensorflow-gpu==${TENSORFLOW_VERSION} h5py cython keras
