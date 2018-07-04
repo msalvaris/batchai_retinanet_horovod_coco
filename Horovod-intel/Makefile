@@ -34,8 +34,7 @@ define execute_mpi
  			   -envlist LD_LIBRARY_PATH,PATH \
  			   -env I_MPI_DEBUG=6 \
  			   -env I_MPI_HYDRA_DEBUG=on \
- 			   printenv
-
+ 			   printenv"
 endef
 #-env AZ_BATCHAI_INPUT_DATA=$$AZ_BATCHAI_INPUT_DATA \
 # 			   -env AZ_BATCHAI_INPUT_SCRIPT=/hi \
