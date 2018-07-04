@@ -39,13 +39,13 @@ define execute_mpi
  			   python ${AZ_BATCHAI_INPUT_SCRIPT}/train.py --steps 500 --tensorboard-dir $$AZ_BATCHAI_OUTPUT_OUTPUTFILES/tensorboard --snapshot-path $$AZ_BATCHAI_OUTPUT_OUTPUTFILES --no-evaluation coco $$AZ_BATCHAI_INPUT_DATA"
 endef
 
-#define execute
-# nvidia-docker run -it \
-# $(setup_environment) \
-# $(setup_volumes) \
-# --privileged \
-# $(1) bash -c "python $AZ_BATCHAI_INPUT_SCRIPT/train.py --steps 500 --tensorboard-dir $AZ_BATCHAI_OUTPUT_OUTPUTFILES/tensorboard --snapshot-path $AZ_BATCHAI_OUTPUT_OUTPUTFILES --no-evaluation coco $AZ_BATCHAI_INPUT_DATA""
-#endef
+define execute
+ nvidia-docker run -it \
+ $(setup_environment) \
+ $(setup_volumes) \
+ --privileged \
+ $(1) bash -c "printenv"
+endef
 
 help:
 	echo "$$PROJECT_HELP_MSG" | less
@@ -56,8 +56,8 @@ build:
 run-mpi:
 	$(call execute_mpi, $(name_prefix)/horovod-batchai-coco-retinanet:$(tag))
 
-#run:
-#	$(call execute, $(name_prefix)/horovod-batchai-coco-retinanet:$(tag))
+run:
+	$(call execute, $(name_prefix)/horovod-batchai-coco-retinanet:$(tag))
 
 push:
 	docker push $(name_prefix)/horovod-batchai-coco-retinanet:$(tag)
