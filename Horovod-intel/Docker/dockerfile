@@ -73,7 +73,7 @@ RUN pip install tensorflow-gpu==${TENSORFLOW_VERSION} h5py cython keras
 
 # Install Dependencies
 RUN pip install --no-cache-dir scipy jupyter ipykernel numpy toolz pandas \
- 	scikit-learn pillow pycocotools opencv-python matplotlib
+ 	scikit-learn pillow pycocotools opencv-python matplotlib python3-tk
 
 # Install Horovod, temporarily using CUDA stubs
 RUN ldconfig /usr/local/cuda-9.0/targets/x86_64-linux/lib/stubs && \
