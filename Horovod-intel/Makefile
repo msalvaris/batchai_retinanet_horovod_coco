@@ -35,7 +35,7 @@ define execute_mpi
  			   -env I_MPI_DEBUG=6 \
  			   -env I_MPI_HYDRA_DEBUG=on \
  			   -env AZ_BATCHAI_INPUT_DATA=$$AZ_BATCHAI_INPUT_DATA \
- 			   -env AZ_BATCHAI_INPUT_SCRIPT=/hi\
+ 			   -env AZ_BATCHAI_INPUT_SCRIPT=/hi \
  			   python $$AZ_BATCHAI_INPUT_SCRIPT/train.py --steps 500 --tensorboard-dir $$AZ_BATCHAI_OUTPUT_OUTPUTFILES/tensorboard --snapshot-path $$AZ_BATCHAI_OUTPUT_OUTPUTFILES --no-evaluation coco $$AZ_BATCHAI_INPUT_DATA"
 endef
 
