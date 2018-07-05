@@ -153,17 +153,9 @@ list-nodes:
 	az batchai cluster list-nodes -n ${CLUSTER_NAME} -w $(WORKSPACE) -o table
 
 
-run-bait-intel:
-	$(call generate_job_intel, $(NUM_NODES), $(MODEL), $(PROCESSES_PER_NODE))
+run-job:
 	$(call submit_job, ${JOB_NAME})
 
-run-bait-openmpi:
-	$(call generate_job_openmpi, $(NUM_NODES), $(MODEL), $(PROCESSES_PER_NODE))
-	$(call submit_job, ${JOB_NAME})
-
-run-bait-local:
-	$(call generate_job_local, $(MODEL), $(PROCESSES_PER_NODE))
-	$(call submit_job, ${JOB_NAME})
 
 list-jobs:
 	az batchai job list -w $(WORKSPACE) -e $(EXPERIMENT) -o table
