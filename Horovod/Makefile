@@ -32,7 +32,6 @@ define execute_mpi
  $(1) bash -c "mpirun -np 2 -H localhost:2 -bind-to none\
   			   -map-by slot -x NCCL_DEBUG=INFO \
   			   -x LD_LIBRARY_PATH -x PATH \
- 			   -mca pml ob1 -mca btl ^openib \
  			   python \$${AZ_BATCHAI_INPUT_SCRIPT}/train.py --steps 500 --tensorboard-dir \$$AZ_BATCHAI_OUTPUT_OUTPUTFILES/tensorboard --snapshot-path \$$AZ_BATCHAI_OUTPUT_OUTPUTFILES --no-evaluation coco \$$AZ_BATCHAI_INPUT_DATA"
 endef
 
