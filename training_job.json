@@ -15,6 +15,11 @@
                       python $AZ_BATCHAI_MOUNT_ROOT/extfs/scripts/train.py --steps 500 --tensorboard-dir $AZ_BATCHAI_OUTPUT_OUTPUTFILES/tensorboard --snapshot-path $AZ_BATCHAI_OUTPUT_OUTPUTFILES --no-evaluation coco $AZ_BATCHAI_MOUNT_ROOT/extcn"
     },
     "stdOutErrPathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/extfs",
+    "containerSettings": {
+                "imageSourceRegistry": {
+                    "image": "masalvar/horovod-batchai-coco-retinanet:9-1.8-0.13.2"
+                }
+    },
     "outputDirectories": [
       {
         "id": "OUTPUTFILES",
