@@ -18,7 +18,7 @@ GROUP_NAME:=batch${ID}rg
 STORAGE_ACCOUNT_NAME:=batch${ID}st
 CONTAINER_NAME:=batch${ID}container
 FILE_SHARE_NAME:=batch${ID}share
-VM_SIZE:=Standard_NC24r
+VM_SIZE:=Standard_NC24rs_v3
 NUM_NODES:=2
 CLUSTER_NAME:=cococluster
 JOB_NAME:=cocoretinanet
@@ -27,7 +27,7 @@ SELECTED_SUBSCRIPTION:="Team Danielle Internal"
 WORKSPACE:=workspace
 EXPERIMENT:=experiment
 PROCESSES_PER_NODE:=4
-GPU_TYPE:=k80
+GPU_TYPE:=v100
 DATA_PATH='/mnt/coco'
 
 
