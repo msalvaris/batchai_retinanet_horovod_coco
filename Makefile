@@ -119,7 +119,7 @@ upload-validation: set-storage
 
 
 upload-script:
-	az storage file upload --share-name ${FILESHARE_NAME} --source train.py --path scripts
+	az storage file upload --share-name ${FILE_SHARE_NAME} --source train.py --path scripts
 
 
 create-workspace:
