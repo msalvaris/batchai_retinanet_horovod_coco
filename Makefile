@@ -83,8 +83,6 @@ set-storage:
 	$(eval azure_storage_key:=$(shell az storage account keys list -n $(STORAGE_ACCOUNT_NAME) -g $(GROUP_NAME) | jq '.[0]["value"]'))
 	$(eval azure_storage_account:= $(STORAGE_ACCOUNT_NAME))
 	$(eval file_share_name:= $(FILE_SHARE_NAME))
-	export AZURE_STORAGE_ACCOUNT=${STORAGE_ACCOUNT_NAME}
-	export AZURE_STORAGE_KEY=${azure_storage_key}
 
 set-az-defaults:
 	az configure --defaults location=${LOCATION}
@@ -119,7 +117,8 @@ upload-validation: set-storage
 
 
 upload-script: set-storage
-	az storage file upload --share-name ${FILE_SHARE_NAME} --source train.py --path scripts
+	az storage file upload --share-name ${FILE_SHARE_NAME} --source train.py --path scripts \
+	--account-name ${azure_storage_account} --account-key ${azure_storage_key}
 
 
 create-workspace:
