@@ -29,7 +29,7 @@ define execute_mpi
  $(setup_environment) \
  $(setup_volumes) \
  --privileged \
- $(1) bash -c "mpirun -np $(numproc) -H localhost:$(numproc) -bind-to none\
+ $(1) bash -c "mpirun -np 2 -H localhost:2 -bind-to none\
   			   -map-by slot -x NCCL_DEBUG=INFO \
   			   -x LD_LIBRARY_PATH -x PATH \
  			   -mca pml ob1 -mca btl ^openib \
