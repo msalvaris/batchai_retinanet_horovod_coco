@@ -39,6 +39,8 @@ RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ xenia
     azure-cli
 
 # Install AzCopy
-RUN wget -O azcopy.tar.gz https://aka.ms/downloadazcopylinux64 && \
-	tar -xf azcopy.tar.gz &&\
-	./install.sh
+RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod/ xenial main" > azure.list && \
+	cp ./azure.list /etc/apt/sources.list.d/ && \
+	apt-key adv --keyserver packages.microsoft.com --recv-keys B02C46DF417A0893 && \
+	apt-get update && \
+	apt-get install azcopy
