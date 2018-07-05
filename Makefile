@@ -100,7 +100,7 @@ create-directory: create-fileshare set-storage
 
 create-container: set-storage
 	@echo "Creating container"
-	az storage container create --account-name ${STORAGE_ACCOUNT_NAME} --account-key $storage_account_key --name ${CONTAINER_NAME}
+	az storage container create --account-name ${azure_storage_account} --account-key ${azure_storage_key} --name ${CONTAINER_NAME}
 
 upload-training-data: set-storage
 	azcopy --source ${DATA_PATH}/images/train2017 \
