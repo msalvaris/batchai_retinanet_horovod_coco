@@ -150,7 +150,7 @@ list-clusters:
 	az batchai cluster list -w $(WORKSPACE) -o table
 
 list-nodes:
-	az batchai cluster node list -n ${CLUSTER_NAME} -w $(WORKSPACE) -o table
+	az batchai cluster node list -ck ${CLUSTER_NAME} -w $(WORKSPACE) -o table
 
 
 run-job:
