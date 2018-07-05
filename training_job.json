@@ -4,7 +4,7 @@
     "nodeCount": 2,
     "customToolkitSettings": {
       "processCount": 8,
-      "commandLine": "source /opt/intel/compilers_and_libraries_2017.4.196/linux/mpi/intel64/bin/mpivars.sh; echo $AZ_BATCH_HOST_LIST; ifconfig -a; mpirun -n 8 -ppn 4 -hosts $AZ_BATCH_HOST_LIST -env I_MPI_FABRICS=dapl -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -env I_MPI_DYNAMIC_CONNECTION=0 -env I_MPI_DEBUG=6 -env I_MPI_HYDRA_DEBUG=on -env NCCL_SOCKET_IFNAME=eth0 -env NCCL_DEBUG=INFO -genvall python $AZ_BATCHAI_MOUNT_ROOT/extfs/scripts/train.py --steps 500 --tensorboard-dir $AZ_BATCHAI_OUTPUT_OUTPUTFILES/tensorboard --snapshot-path $AZ_BATCHAI_OUTPUT_OUTPUTFILES --no-evaluation coco $AZ_BATCHAI_MOUNT_ROOT/extcn"
+      "commandLine": "source /opt/intel/compilers_and_libraries_2017.4.196/linux/mpi/intel64/bin/mpivars.sh; echo $AZ_BATCH_HOST_LIST; ifconfig -a; mpirun -n 8 -ppn 4 -hosts $AZ_BATCH_HOST_LIST -env I_MPI_FABRICS=dapl -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0 -env I_MPI_DYNAMIC_CONNECTION=0 -env I_MPI_DEBUG=6 -env I_MPI_HYDRA_DEBUG=on -env NCCL_SOCKET_IFNAME=eth0 -env NCCL_DEBUG=INFO -env NCCL_IB_DISABLE=1 -envlist LD_LIBRARY_PATH,PATH -genvall python $AZ_BATCHAI_MOUNT_ROOT/extfs/scripts/train.py --steps 500 --tensorboard-dir $AZ_BATCHAI_OUTPUT_OUTPUTFILES/tensorboard --snapshot-path $AZ_BATCHAI_OUTPUT_OUTPUTFILES --no-evaluation coco $AZ_BATCHAI_MOUNT_ROOT/extcn"
     },
     "stdOutErrPathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/extfs",
     "containerSettings": {
