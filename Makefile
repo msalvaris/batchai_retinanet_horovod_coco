@@ -48,7 +48,7 @@ endef
 
 
 define submit_job
-	az batchai job create -n $(1) --cluster ${CLUSTER_NAME} -w $(WORKSPACE) -e $(EXPERIMENT) -f job.json
+	az batchai job create -n $(1) --cluster ${CLUSTER_NAME} -w $(WORKSPACE) -e $(EXPERIMENT) -f training_job.json
 endef
 
 define delete_job
