@@ -105,17 +105,17 @@ create-container: set-storage
 upload-training-data: set-storage
 	azcopy --source ${DATA_PATH}/images/train2017 \
 	--destination  https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net/${CONTAINER_NAME}/images/train2017 \
-    --dest-key $storage_account_key --quiet --recursive
+    --dest-key $(azure_storage_key) --quiet --recursive
 
 upload-annotations: set-storage
 	azcopy --source ${DATA_PATH}/annotations \
 	--destination  https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net/${CONTAINER_NAME}/annotations \
-    --dest-key $storage_account_key --quiet --recursive
+    --dest-key $(azure_storage_key) --quiet --recursive
 
 upload-validation: set-storage
 	azcopy --source ${DATA_PATH}/images/val2017 \
 	--destination  https://${STORAGE_ACCOUNT_NAME}.blob.core.windows.net/${CONTAINER_NAME}/images/val2017 \
-    --dest-key $storage_account_key --quiet --recursive
+    --dest-key $(azure_storage_key) --quiet --recursive
 
 
 upload-script:
