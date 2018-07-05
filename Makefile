@@ -136,8 +136,8 @@ create-cluster: set-storage
 	--min ${NUM_NODES} --max ${NUM_NODES} \
 	--afs-name ${FILE_SHARE_NAME} \
 	--afs-mount-path extfs \
-	--container-name ${CONTAINER_NAME} \
-	--container-mount-path extcn \
+	--bfs-name ${CONTAINER_NAME} \
+	--bfs-mount-path extcn \
 	--user-name mat \
 	--password dnstvxrz \
 	--storage-account-name $(STORAGE_ACCOUNT_NAME) \
