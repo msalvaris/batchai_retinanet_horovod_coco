@@ -83,8 +83,8 @@ set-storage:
 	$(eval azure_storage_key:=$(shell az storage account keys list -n $(STORAGE_ACCOUNT_NAME) -g $(GROUP_NAME) | jq '.[0]["value"]'))
 	$(eval azure_storage_account:= $(STORAGE_ACCOUNT_NAME))
 	$(eval file_share_name:= $(FILE_SHARE_NAME))
-	export AZURE_STORAGE_ACCOUNT ${STORAGE_ACCOUNT_NAME}
-	export AZURE_STORAGE_KEY ${azure_storage_key}
+	export AZURE_STORAGE_ACCOUNT=${STORAGE_ACCOUNT_NAME}
+	export AZURE_STORAGE_KEY=${azure_storage_key}
 
 set-az-defaults:
 	az configure --defaults location=${LOCATION}
