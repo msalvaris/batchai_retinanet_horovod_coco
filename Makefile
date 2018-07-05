@@ -118,7 +118,7 @@ upload-validation: set-storage
     --dest-key $(azure_storage_key) --quiet --recursive
 
 
-upload-script:
+upload-script: set-storage
 	az storage file upload --share-name ${FILE_SHARE_NAME} --source train.py --path scripts
 
 
