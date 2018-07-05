@@ -8,7 +8,7 @@ endef
 export PROJECT_HELP_MSG
 
 
-image_name:=masalvar/batchai-retinanet:9-1.8-0.13.2 # CUDA - Tensorflow - Horovod
+image_name:=masalvar/batchai-retinanet-control
 PWD:=$(shell pwd)
 
 # Variables for Batch AI - change as necessary
