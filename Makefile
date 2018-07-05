@@ -28,7 +28,7 @@ WORKSPACE:=workspace
 EXPERIMENT:=experiment
 PROCESSES_PER_NODE:=4
 GPU_TYPE:=v100
-DATA_PATH='/'
+DATA_PATH='/mnt/coco'
 
 
 
@@ -63,7 +63,7 @@ build:
 	docker build -t $(image_name) Docker
 
 run:
-	docker run -v $(PWD):/workspace -it $(image_name) bash
+	docker run -v $(PWD):/workspace -v $(DATA_PATH):$(DATA_PATH) -it $(image_name) bash
 
 push:
 	docker push $(image_name)
