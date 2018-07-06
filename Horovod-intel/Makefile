@@ -32,8 +32,6 @@ define execute_mpi
  $(1) bash -c "source /opt/intel/compilers_and_libraries_2017.4.196/linux/mpi/intel64/bin/mpivars.sh; \
  			   mpirun -n $(numproc) -host localhost -ppn $(numproc) -env NCCL_DEBUG=INFO \
  			   -envlist LD_LIBRARY_PATH,PATH \
- 			   -env I_MPI_FABRICS=dapl \
- 			   -env I_MPI_DAPL_PROVIDER=ofa-v2-ib0 \
  			   -env I_MPI_DYNAMIC_CONNECTION=0 \
  			   -env I_MPI_DEBUG=6 \
  			   -env I_MPI_HYDRA_DEBUG=on \
