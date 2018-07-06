@@ -180,7 +180,7 @@ delete-cluster:
 
 delete: delete-cluster
 	az batchai experiment delete -w $(WORKSPACE) --name ${EXPERIMENT} -g ${GROUP_NAME} -y
-	az batchai workspace delete -w ${WORKSPACE} -g ${GROUP_NAME} -y
+	az batchai workspace delete -n ${WORKSPACE} -g ${GROUP_NAME} -y
 	az group delete --name ${GROUP_NAME} -y
 
 
