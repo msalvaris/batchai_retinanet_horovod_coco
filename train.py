@@ -18,7 +18,6 @@ limitations under the License.
 mpiexec -n 2 python /mnt/batch/tasks/shared/LS_root/mounts/afs_batchai/scripts/train.py --steps 500 --tensorboard-dir ./logs --no-evaluation coco /mnt/batch/tasks/shared/LS_root/mounts/coco > output.txt 2>&1
 """
 import horovod.keras as hvd
-hvd.init()
 
 import argparse
 import functools
@@ -30,6 +29,7 @@ import keras
 import keras.preprocessing.image
 from keras.utils import multi_gpu_model
 import tensorflow as tf
+from keras import backend as K
 
 # Allow relative imports when being executed as script.
 if __name__ == "__main__" and __package__ is None:
@@ -381,6 +381,8 @@ def parse_args(args):
 
 
 def main(args=None):
+    hvd.init()
+
     # parse arguments
     if args is None:
         args = sys.argv[1:]
@@ -395,7 +397,11 @@ def main(args=None):
     # optionally choose specific GPU
     if args.gpu:
         os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
-    keras.backend.tensorflow_backend.set_session(get_session())
+    K.set_session(get_session())
+    # keras.backend.tensorflow_backend.set_session(get_session())
+
+    resume_from_epoch=0
+    resume_from_epoch = hvd.broadcast(resume_from_epoch, 0, name='resume_from_epoch')
 
     # create the generators
     train_generator, validation_generator = create_generators(args)
@@ -446,6 +452,7 @@ def main(args=None):
         steps_per_epoch=args.steps,
         epochs=args.epochs,
         verbose=1,
+        workers=4,
         callbacks=callbacks,
     )
 
