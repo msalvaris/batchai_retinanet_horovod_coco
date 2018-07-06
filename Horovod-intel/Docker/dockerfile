@@ -21,6 +21,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         wget \
         ca-certificates \
         libcudnn7=${CUDNN_VERSION} \
+        libnccl2=${NCCL_VERSION} \
+        libnccl-dev=${NCCL_VERSION} \
         libjpeg-dev \
         libpng-dev \
         net-tools \
@@ -43,6 +45,23 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         ibutils
 
 
+
+RUN mv /usr/bin/python /usr/bin/python-old && \
+	ln -s /usr/bin/python${PYTHON_VERSION} /usr/bin/python
+
+RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
+    python get-pip.py && \
+    rm get-pip.py
+
+# Install TensorFlow and Keras
+RUN pip install tensorflow-gpu==${TENSORFLOW_VERSION} h5py cython keras==2.2.0
+
+
+# Install Dependencies
+RUN pip install --no-cache-dir scipy jupyter ipykernel numpy toolz pandas \
+ 	scikit-learn pillow pycocotools opencv-python matplotlib
+
+
 # install intel MPI
 RUN cd /tmp && \
     wget -q 'http://registrationcenter-download.intel.com/akdlm/irc_nas/tec/11595/l_mpi_2017.3.196.tgz' && \
@@ -59,20 +78,6 @@ RUN cd /tmp && \
 
 ENV PATH $PATH:/opt/intel/compilers_and_libraries/linux/mpi/bin64
 
-RUN mv /usr/bin/python /usr/bin/python-old && \
-	ln -s /usr/bin/python${PYTHON_VERSION} /usr/bin/python
-
-RUN curl -O https://bootstrap.pypa.io/get-pip.py && \
-    python get-pip.py && \
-    rm get-pip.py
-
-# Install TensorFlow and Keras
-RUN pip install tensorflow-gpu==${TENSORFLOW_VERSION} h5py cython keras==2.2.0
-
-
-# Install Dependencies
-RUN pip install --no-cache-dir scipy jupyter ipykernel numpy toolz pandas \
- 	scikit-learn pillow pycocotools opencv-python matplotlib
 
 # Install Horovod, temporarily using CUDA stubs
 RUN ldconfig /usr/local/cuda-9.0/targets/x86_64-linux/lib/stubs && \
